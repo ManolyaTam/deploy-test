@@ -1,5 +1,6 @@
 import express from 'express';
 import fs from 'fs';
+import path from 'path';
 import { character } from './types'
 
 const app = express();
@@ -41,9 +42,9 @@ app.get("/characters/:id", (req: express.Request, res: express.Response) => {
   })
 })
 
-// app.use('*', (req: express.Request, res: express.Response) => {
-//   res.status(404).send("Route doesn't exist")
-// })
+app.use((req: express.Request, res: express.Response) => {
+  res.sendFile(path.join(__dirname, 'not-found.html'));
+})
 
 app.listen(port, () => {
   console.log(`listening on port ${port}`)
